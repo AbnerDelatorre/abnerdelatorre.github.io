@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arenas Movedizas | Novela de Historia Alternativa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Playfair+Display:ital,wght@0,700;1,400&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #d4af37; /* Color Arena / Oro viejo */
+            --bg-dark: #0a0a0a;
+            --bg-card: #151515;
+            --text-light: #e0e0e0;
+            --text-dim: #777;
+            --danger: #8b0000; /* Rojo sangre seca */
+            --accent: #222;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Roboto Mono', monospace;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(10, 10, 10, 0.2), rgba(10, 10, 10, 1)), 
+                        url('https://images.unsplash.com/photo-1547499681-28dece7dba00?auto=format&fit=crop&q=80&w=1600');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            z-index: 10;
+            padding: 0 20px;
+        }
+
+        .novel-title {
+            font-size: clamp(3rem, 12vw, 7rem);
+            line-height: 0.9;
+            margin-bottom: 10px;
+            color: #fff;
+            filter: drop-shadow(0 0 10px rgba(0,0,0,0.8));
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: bold;
+            letter-spacing: 5px;
+            margin-bottom: 30px;
+        }
+
+        .divider {
+            width: 80px;
+            height: 5px;
+            background: var(--danger);
+            margin: 0 auto 30px;
+        }
+
+        .tagline {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.4rem;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            padding: 18px 35px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 10px;
+            border-radius: 2px;
+        }
+
+        .btn-primary {
+            background: var(--danger);
+            color: white;
+            border: 1px solid var(--danger);
+        }
+
+        .btn-primary:hover {
+            background: #600;
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            border: 1px solid var(--text-light);
+            color: var(--text-light);
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-light);
+            color: var(--bg-dark);
+        }
+
+        /* --- QUOTE --- */
+        .quote-section {
+            background: var(--accent);
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        blockquote {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            color: #fff;
+            position: relative;
+        }
+
+        blockquote::before {
+            content: "“";
+            font-size: 5rem;
+            color: var(--danger);
+            position: absolute;
+            left: -40px;
+            top: -40px;
+        }
+
+        /* --- GRID SECTIONS --- */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .label {
+            color: var(--danger);
+            font-weight: bold;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            line-height: 1.1;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: #bbb;
+        }
+
+        .war-image {
+            height: 500px;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)),
+                        url('https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?auto=format&fit=crop&q=80&w=800');
+            background-size: cover;
+            background-position: center;
+            border: 1px solid #333;
+            box-shadow: 20px 20px 0px var(--danger);
+        }
+
+        /* --- CARDS --- */
+        .bg-black { background-color: #050505; }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 40px;
+            border-bottom: 4px solid #222;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            border-bottom-color: var(--danger);
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .role-tag {
+            font-size: 0.7rem;
+            background: #333;
+            padding: 3px 8px;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        /* --- RADAR / MAP --- */
+        .map-container {
+            height: 400px;
+            background: #000;
+            border: 1px dashed #444;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .radar-line {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: conic-gradient(from 0deg, rgba(212, 175, 55, 0.1) 0%, transparent 20%);
+            animation: rotate 4s linear infinite;
+        }
+
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+        .point {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--danger);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--danger);
+        }
+
+        .point-label {
+            position: absolute;
+            font-size: 0.6rem;
+            color: var(--primary);
+            margin-top: 10px;
+            margin-left: -10px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            padding: 60px 20px;
+            text-align: center;
+            border-top: 1px solid #222;
+            font-size: 0.8rem;
+            color: #555;
+        }
+
+        .fictional-brand {
+            font-weight: bold;
+            color: var(--text-dim);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .novel-title { font-size: 3.5rem; }
+            .war-image { order: -1; height: 300px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero">
+        <div class="hero-content">
+            <p class="subtitle">LA LAGUNA LIBRE</p>
+            <h1 class="novel-title">ARENAS<br>MOVEDIZAS</h1>
+            <div class="divider"></div>
+            <p class="tagline">Entre el asfalto de Torreón y el polvo del desierto, la soberanía se escribe con sangre y contratos privados.</p>
+            <div class="hero-btns">
+                <a href="#info" class="btn btn-primary">Orden de Operaciones</a>
+                <a href="#" class="btn btn-secondary">Comprar Novela</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="quote-section">
+        <blockquote>
+            "No somos un estado, somos una herida que México no supo cerrar."
+        </blockquote>
+    </section>
+
+    <section id="info" class="section container">
+        <div class="grid">
+            <div class="content-block">
+                <span class="label">Archivo Confidencial #88-B12</span>
+                <h2>La Serbia de los Estados del Norte</h2>
+                <p>La Laguna no pidió permiso. Con un 74% de apoyo popular, la región se declaró independiente, desafiando tanto a la nueva capital en Monterrey como al viejo régimen de la CDMX.</p>
+                <p>Lo que siguió fueron cuatro meses de guerra urbana. Torreón se convirtió en un Grozny mexicano. Las milicias locales, aliadas con las estructuras logísticas de los cárteles, resistieron dos ofensivas federales utilizando tácticas de guerrilla urbana aprendidas de veteranos extranjeros.</p>
+                <p>Ahora, en la paz de las sombras, surge la pregunta: ¿Se liberaron para ser dueños de su destino, o para convertirse en el patio de juegos de contratistas privados y empresas tejanas?</p>
+            </div>
+            <div class="war-image"></div>
+        </div>
+    </section>
+
+    <section class="bg-black">
+        <div class="container">
+            <span class="label" style="text-align: center;">Estructura de Poder</span>
+            <h2 style="text-align: center; margin-bottom: 50px;">Actores de la Post-Guerra</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <span class="role-tag">Soberanía</span>
+                    <h3>El Ejército Híbrido</h3>
+                    <p>Antiguos sicarios ahora uniformados como "Guardias Regionales", entrenados por instructores georgianos para defender el perímetro del Nazas.</p>
+                </div>
+                <div class="card">
+                    <span class="role-tag">Economía</span>
+                    <h3>El Enclave Industrial</h3>
+                    <p>Las plantas de Gómez Palacio y Torreón operan bajo leyes estadounidenses. La seguridad es privada, eficiente y letal.</p>
+                </div>
+                <div class="card">
+                    <span class="role-tag">Resistencia</span>
+                    <h3>Los Fieles al Nazas</h3>
+                    <p>Civiles que creen en la independencia real, atrapados entre el fuego del narcoestado y la ambición extranjera.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section container">
+        <div class="grid">
+            <div class="map-container">
+                <div class="radar-line"></div>
+                <div class="point" style="top: 40%; left: 50%;"></div>
+                <div class="point-label" style="top: 40%; left: 50%;">TORREÓN (ZONA ZERO)</div>
+                
+                <div class="point" style="top: 45%; left: 45%;"></div>
+                <div class="point-label" style="top: 45%; left: 45%;">GÓMEZ P.</div>
+
+                <div class="point" style="top: 55%; left: 40%;"></div>
+                <div class="point-label" style="top: 55%; left: 40%;">LERDO (FRONTERA SUR)</div>
+            </div>
+            <div class="content-block">
+                <span class="label">Geopolítica Regional</span>
+                <h2>Un Territorio en Disputa</h2>
+                <p>Desde la Sierra del Sarnoso hasta los límites con el estado de Durango, cada kilómetro es una contradicción. La Laguna negocia tierras con EE.UU. a cambio de reconocimiento, mientras el ejército profesional patrulla las calles que ellos mismos incendiaron.</p>
+                <p><strong>Arenas Movedizas</strong> es el relato de esa caída. Un lugar donde la victoria se siente exactamente igual que una trampa.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <span class="fictional-brand">DESIERTO ALTO EDITORES</span>
+        <p>&copy; 2026 Arenas Movedizas. Todos los derechos reservados. <br> Torreón, República del Nazas.</p>
+    </footer>
+
+</body>
+</html>
